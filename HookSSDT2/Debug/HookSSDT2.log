@@ -1,0 +1,32 @@
+﻿  Building 'HookSSDT2' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping Debug\HookSSDT2.inf
+  Stamping [Version] section with DriverVer=03/15/2020,14.33.29.320
+trace.h(1): warning wpp: -scan found no begin_wpp blocks. Rescanning as INI file. This behavior will be removed in a future release.
+  Driver.c
+C:\Users\bkm19\source\repos\HookSSDT2\HookSSDT2\Driver.c(87,50): warning C4057: '=': 'PLONG' differs in indirection to slightly different base types from 'UINT32 *'
+C:\Users\bkm19\source\repos\HookSSDT2\HookSSDT2\Driver.c(101,56): warning C4047: 'function': 'LONG' differs in levels of indirection from 'PUCHAR'
+C:\Users\bkm19\source\repos\HookSSDT2\HookSSDT2\Driver.c(101,56): warning C4024: '_InterlockedExchange': different types for formal and actual parameter 2
+C:\Users\bkm19\source\repos\HookSSDT2\HookSSDT2\Driver.c(127,66): warning C4133: 'function': incompatible types - from 'PULONG' to 'PUCHAR'
+C:\Users\bkm19\source\repos\HookSSDT2\HookSSDT2\Driver.c(127,98): warning C4133: 'function': incompatible types - from 'PULONG' to 'PUCHAR'
+C:\Users\bkm19\source\repos\HookSSDT2\HookSSDT2\Driver.c(127,99): warning C4047: '=': 'ZwEnumerateValueKeyOriginal' differs in levels of indirection from 'PUCHAR'
+C:\Users\bkm19\source\repos\HookSSDT2\HookSSDT2\Driver.c(143,63): warning C4047: 'function': 'LONG' differs in levels of indirection from 'PULONG'
+C:\Users\bkm19\source\repos\HookSSDT2\HookSSDT2\Driver.c(143,63): warning C4024: '_InterlockedExchange': different types for formal and actual parameter 2
+  HookSSDT2.vcxproj -> C:\Users\bkm19\source\repos\HookSSDT2\Debug\HookSSDT2.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\bkm19\source\repos\HookSSDT2\Debug\HookSSDT2.sys
+  
+  Driver is a Universal Driver.
+  .........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\bkm19\source\repos\HookSSDT2\Debug\HookSSDT2\hookssdt2.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\bkm19\source\repos\HookSSDT2\Debug\HookSSDT2\hookssdt2.cat
+  
