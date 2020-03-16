@@ -17,17 +17,9 @@ HookSSDT2.vcxproj.filters
     similar extensions under a specific node (for e.g. ".cpp" files are associated with the
     "Source Files" filter).
 
-Public.h
-    Header file to be shared with applications.
-
 Driver.c & Driver.h
-    DriverEntry and WDFDRIVER related functionality and callbacks.
-
-Device.c & Device.h
-    WDFDEVICE related functionality and callbacks.
-
-Queue.c & Queue.h
-    WDFQUEUE related functionality and callbacks.
+    DriverEntry and WDFDRIVER related functionality and callbacks. This is where the function 
+Hooking is taking place
 
 Trace.h
     Definitions for WPP tracing.
