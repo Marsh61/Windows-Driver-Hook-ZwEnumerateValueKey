@@ -21,9 +21,6 @@ Driver.c & Driver.h
     DriverEntry and WDFDRIVER related functionality and callbacks. This is where the function 
 Hooking is taking place
 
-Trace.h
-    Definitions for WPP tracing.
-
 /////////////////////////////////////////////////////////////////////////////
 
 Learn more about Kernel Mode Driver Framework here:
